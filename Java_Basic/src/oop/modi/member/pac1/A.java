@@ -21,6 +21,5 @@ public class A {
 	public void method1() {}
 	void method2() {}
 	private void method3() {}
-	
 
 }

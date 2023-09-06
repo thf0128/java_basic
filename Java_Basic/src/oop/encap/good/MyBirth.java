@@ -78,31 +78,58 @@ public class MyBirth {
 	public int getMonth() {
 		return month;
 	}
-	
+
 	public void setDay(int day) {
 		if(day > 31 || day < 1) {
 			System.out.println("잘못된 일 입력입니다.");
 		}else {
+			if(this.month == 0) {
+				System.out.println("일자를 입력하기 위해서는 월 입력이 선행되어야 합니다.");
+				return;
+			}
+			if(!isValidateMonth(day)) {
+				System.out.println("월에 따른 일자가 올바르지 않습니다.");
+				return;
+			}
 			this.day = day;
 		}
 	}
-	
+
 	public int getDay() {
 		return day;
 	}
-	
+
 	public void birthInfo() {
 		// year, month, day 셋 중 단 하나라도 제대로 값이 셋팅되지 않다면
-		// 출력을 해 주지 않겠다.
+		// 출력을 해 주지 않겠다.\
+		if(this.year == 0 || this.month == 0 || this.day == 0) {
+			System.out.println("날짜 필드 중에 초기화 되지 않은 데이터가 있습니다.");
+			return;
+		} 
+		
+		System.out.printf("내 생일은 %d년 %d월 %d일 입니다.\n"
+				, this.year, this.month, this.day);
 	}
-	
-	public void isValidateMonth() {
+
+	public boolean isValidateMonth(int day) {
 		// 각 월에 적합한 일자가 세팅이 되어 있는지를 판별하는 메서드
+		switch(this.month) {
+		case 2:
+			if(day > 28) {
+				return false;
+			}
+		case 4: case 6: case 9: case 11:
+			if(day > 30) {
+				return false;
+			}
+		default:
+			return true;
+		}
 	}
-	
+
 	/*
 	 - 데이터와 데이터를 다루는 여러가지 메서드들을 하나로 묶는 이러한 행위들을
 	 캡슐화 라고 합니다. (encapsulation)
 	 데이터와 그 데이터를 다루는 로직을 하나로 묶어 쉽게 관리하고 유지 보수하기 위함 입니다.
-	*/
+	 */
 }
